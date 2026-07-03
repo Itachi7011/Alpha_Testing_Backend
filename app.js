@@ -1,6 +1,9 @@
 const express = require('express');
 const AuthNestClient = require('authnest-server');
 const cookieParser = require('cookie-parser');
+const dotenv = require("dotenv");
+
+dotenv.config();
 
 const app = express();
 const authnest = new AuthNestClient();
@@ -14,4 +17,6 @@ app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 // logout, modals, settings, callbacks — everything)
 app.use('/api/authnest', authnest.getRouter());
 
-app.listen(process.env.PORT || 9000);
+app.listen(process.env.PORT || 9000,()=>{
+    console.log("server is running on " + process.env.PORT)
+});
